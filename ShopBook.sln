@@ -9,6 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infostructure", "infostruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Memory", "infostructure\ClassLibrary1\Store.Memory.csproj", "{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{72C3EAC7-BB86-4006-AF24-78AD226B9B27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentation", "{32716955-BE95-4AF7-BF57-5B279ABD6442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreBook.Web", "presentation\StoreBook.Web\StoreBook.Web.csproj", "{03E3E996-119D-45D4-B99E-23682344FC07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +29,18 @@ Global
 		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03E3E996-119D-45D4-B99E-23682344FC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E3E996-119D-45D4-B99E-23682344FC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E3E996-119D-45D4-B99E-23682344FC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E3E996-119D-45D4-B99E-23682344FC07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1} = {72C3EAC7-BB86-4006-AF24-78AD226B9B27}
 		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE} = {4A9197E7-B6F8-48E7-A225-37AE04B0B872}
+		{03E3E996-119D-45D4-B99E-23682344FC07} = {32716955-BE95-4AF7-BF57-5B279ABD6442}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764DB4B6-6A14-490B-B174-6FD583A586FB}
