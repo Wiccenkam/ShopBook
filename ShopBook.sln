@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopBook", "ShopBook\ShopBook.csproj", "{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infostructure", "infostructure", "{4A9197E7-B6F8-48E7-A225-37AE04B0B872}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Memory", "infostructure\ClassLibrary1\Store.Memory.csproj", "{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE} = {4A9197E7-B6F8-48E7-A225-37AE04B0B872}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764DB4B6-6A14-490B-B174-6FD583A586FB}
