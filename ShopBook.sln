@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopBook", "ShopBook\ShopBook.csproj", "{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBook", "ShopBook\ShopBook.csproj", "{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infostructure", "infostructure", "{4A9197E7-B6F8-48E7-A225-37AE04B0B872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Memory", "infostructure\ClassLibrary1\Store.Memory.csproj", "{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.Memory", "infostructure\ClassLibrary1\Store.Memory.csproj", "{5CBF035A-FC6C-4E9F-B58C-48FED56724FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{72C3EAC7-BB86-4006-AF24-78AD226B9B27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentation", "{32716955-BE95-4AF7-BF57-5B279ABD6442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreBook.Web", "presentation\StoreBook.Web\StoreBook.Web.csproj", "{03E3E996-119D-45D4-B99E-23682344FC07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreBook.Web", "presentation\StoreBook.Web\StoreBook.Web.csproj", "{03E3E996-119D-45D4-B99E-23682344FC07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{04F45C0E-9E41-4942-BEF7-8706832AEC76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{03E3E996-119D-45D4-B99E-23682344FC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03E3E996-119D-45D4-B99E-23682344FC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03E3E996-119D-45D4-B99E-23682344FC07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04F45C0E-9E41-4942-BEF7-8706832AEC76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F45C0E-9E41-4942-BEF7-8706832AEC76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F45C0E-9E41-4942-BEF7-8706832AEC76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F45C0E-9E41-4942-BEF7-8706832AEC76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{FA83CEF9-6D95-4FBE-A0CE-F8A726B36AF1} = {72C3EAC7-BB86-4006-AF24-78AD226B9B27}
 		{5CBF035A-FC6C-4E9F-B58C-48FED56724FE} = {4A9197E7-B6F8-48E7-A225-37AE04B0B872}
 		{03E3E996-119D-45D4-B99E-23682344FC07} = {32716955-BE95-4AF7-BF57-5B279ABD6442}
+		{04F45C0E-9E41-4942-BEF7-8706832AEC76} = {72C3EAC7-BB86-4006-AF24-78AD226B9B27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764DB4B6-6A14-490B-B174-6FD583A586FB}
