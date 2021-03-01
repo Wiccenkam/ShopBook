@@ -18,7 +18,7 @@ namespace StoreBook.Web.Controllers
         public IActionResult Index(string query)
         {
             var books = bookService.GetAllByQuery(query);
-            return View(books);
+            return View("Index", books);
         }
     }
 }
