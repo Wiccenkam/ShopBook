@@ -33,16 +33,15 @@
                 </div>
                 <span class="navbar-text ml-auto">
                     @{
-                        Cart cart;
-                        if (!Context.Session.TryGetCart(out cart))
-                            cart = new Cart();
-                        if (cart.Items.Count == 0)
+
+                        if (Context.Session.TryGetCart(out Cart cart) && cart.TotalCount > 0)
                         {
-                            @:Your Cart is empty
+                            @:You have @cart.TotalCount items in your cart. For total cost: @cart.TotalPrice $
                         }
+
                         else
                         {
-                            @:You have @cart.Items.Count items in your cart. For total cost: @cart.Amount $
+                            @:Your Cart is empty
                         }
                     }
                 </span>
