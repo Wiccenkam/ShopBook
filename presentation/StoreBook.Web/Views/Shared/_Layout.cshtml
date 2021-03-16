@@ -36,7 +36,7 @@
 
                         if (Context.Session.TryGetCart(out Cart cart) && cart.TotalCount > 0)
                         {
-                            @:You have @cart.TotalCount items in your cart. For total cost: @cart.TotalPrice $
+                            <a href="@Url.Action("Index","Order")">  You have @cart.TotalCount items in your cart. For total cost: @cart.TotalPrice $</a>
                         }
 
                         else
