@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ShopBook;
+using ShopBook.Messages;
 using StoreBook.Web.Models;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 
 namespace StoreBook.Web.Controllers
 {
@@ -10,6 +12,7 @@ namespace StoreBook.Web.Controllers
     {
         private readonly IBookRepository bookRepository;
         private readonly IOrderRepository orderRepository;
+        private readonly INotificationService notificationService;
         public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository)
         {
             this.bookRepository = bookRepository;
@@ -39,7 +42,7 @@ namespace StoreBook.Web.Controllers
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
             order.RemoveItem(bookid);
             SaveOrderAndCart(order, cart);
-            return RedirectToAction("Index", "Book", new { bookid });
+            return RedirectToAction("Index", "Order");
         }
         private (Order order,Cart cart ) GetOrCreateOrderAndCart()
         {
@@ -104,6 +107,39 @@ namespace StoreBook.Web.Controllers
                 TotalCount = order.TotalCount,
                 TotalPrice = order.TotalPrice,
             };
+        }
+        [HttpPost]
+        public IActionResult SendConfirmationCode(int orderId, string cellPhone)
+        {
+            var order = orderRepository.GetById(orderId);
+            var model = Map(order);
+
+            if (!IsValidCellPhone(cellPhone))
+            {
+                model.Errors["cellPhone"] = "Phone number must been in fromat +381234567890";
+                return View("Index", model);
+            }
+            int code = 1111;
+            HttpContext.Session.SetInt32(cellPhone, code);
+            notificationService.SendConfirmationCode(cellPhone, code);
+
+            return View("Confirmation",
+                new ConfirmationModel
+                {
+                    OrderId = orderId,
+                    CellPhone = cellPhone
+                });
+        }
+
+        private bool IsValidCellPhone(string cellPhone)
+        {
+            if (cellPhone == null)
+            {
+                return false;
+            }
+
+            cellPhone = cellPhone.Replace(" ", "").Replace("-", "");
+            return Regex.IsMatch(cellPhone, @"^\+?\d{12}$");
         }
     }
 }
