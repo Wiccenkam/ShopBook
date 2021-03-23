@@ -1,0 +1,43 @@
+﻿@model OrderModel
+@{ 
+    ViewData["Title"] = "Cart";
+}
+<h1>Cart</h1>
+
+<table class="table table-sm table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Author</th>
+            <th scope="col">Title</th>
+            <th scope="col">Count</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Items.Length; i++)
+        {
+        <tr>
+            <td class="text-right">@(1 + i)</td>
+            <td>@Model.Items[i].Author</td>
+            <td>@Model.Items[i].Title</td>
+            <td class="text-center">@Model.Items[i].Count</td>
+            <td class="text-center">@Model.Items[i].Price $</td>
+            <td class="text-center">
+                <form class="form-inline" action="@Url.Action("RemoveItem","Order")" method="post">
+                    <input type="hidden" name="bookId" value="@Model.Items[i].BookId"/>
+                    <button class="btn btn-danger" type="submit">Удалить</button> 
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">in total</td>
+            <td class="text-center">@Model.TotalCount</td>
+            <td class="text-center">@Model.TotalPrice</td>
+        </tr>
+    </tfoot>
+</table>

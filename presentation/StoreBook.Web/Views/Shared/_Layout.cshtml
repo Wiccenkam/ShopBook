@@ -29,9 +29,25 @@
                         <input class="form-control mr-sm-2" type="search" name="query">
                         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
                     </form>
+                   
                 </div>
+                <span class="navbar-text ml-auto">
+                    @{
+
+                        if (Context.Session.TryGetCart(out Cart cart) && cart.TotalCount > 0)
+                        {
+                            <a href="@Url.Action("Index","Order")">  You have @cart.TotalCount items in your cart. For total cost: @cart.TotalPrice $</a>
+                        }
+
+                        else
+                        {
+                            @:Your Cart is empty
+                        }
+                    }
+                </span>
             </div>
            
+
         </nav>
         
     </header>

@@ -1,0 +1,29 @@
+﻿@model ConfirmationModel
+@{
+    ViewData["Title"] = "Confirmation phone ";
+}
+<h1>Confirmation phone</h1>
+<h1>Confirmation Phone</h1>
+
+<form action="@Url.Action("Confirmate")" method="post">
+    <input type="hidden" name="orderId" value="@Model.OrderId" />
+    <input type="hidden" name="cellPhone" value="@Model.CellPhone" />
+    <div class="form-group">
+        <label for="codeConfirm">Confirm code</label>
+        <input type="text" class="form-control" name="codeConfirm" placeholder="0000" />
+        @if (Model.Errors.ContainsKey("code"))
+        {
+            <small class="form-text text-danger">@Model.Errors["code"]</small>
+        }
+    </div>
+    <button type="submit" class="btn btn-danger">Verify</button>
+</form>
+
+<form action="@Url.Action("SendConfirmationCode")" method="post">
+    <input type="hidden" name="orderId" value="@Model.OrderId" />
+    <div class="form-group">
+        <label for="cellPhone">Mobile Phone Number</label>
+        <input class="form-control" type="text" name="cellPhone" value="@Model.CellPhone" />
+    </div>
+    <button type="submit" class="btn btn-success">Repeat code</button>
+</form>

@@ -5,7 +5,7 @@
 }
 
 <h1>Search Results:</h1>
-@if (Model.Length == 0)
+@if (Model.Length == 0 || Model==null)
 {
     <p>No results</p>
 }
