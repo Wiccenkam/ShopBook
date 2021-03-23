@@ -25,13 +25,13 @@ namespace StoreBook.Web.Controllers
             }
             return View("Empty");
         }
-        public IActionResult AddItem(int bookid, int count)
+        public IActionResult AddItem(int id, int count=1)//Ошибка представления из за анонимного метода 
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
-            var book = bookRepository.GetById(bookid);
+            var book = bookRepository.GetById(id);
             order.AddOrUpdateItem(book,count);
             SaveOrderAndCart(order, cart);
-            return RedirectToAction("Index", "Book", new { bookid });
+            return RedirectToAction("Index", "Book", new { id  });
            
         }
         public IActionResult RemoveItem(int bookid)
@@ -62,6 +62,7 @@ namespace StoreBook.Web.Controllers
             SaveOrderAndCart(order, cart);
             return RedirectToAction("Index", "Book", new { bookid });
         }
+        [HttpPost]
         public IActionResult UpdateItem(int bookid, int count)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();

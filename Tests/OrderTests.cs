@@ -95,5 +95,27 @@ namespace Tests
             Assert.Equal(10, order.GetItem(4).Count);
 
         }
+        [Fact]
+        public void RemoveItem_WithExistingItem_RemoveItem()
+        {
+            var order = new Order(1, new[]
+            {
+                new OrderItem(1,3,10m),
+                new OrderItem(2,5,100m),
+                });
+            order.RemoveItem(1);
+            Assert.Equal(1,order.Items.Count);
+        }
+        [Fact]
+        public void RemoveItem_WithNoExistingItem_RemoveItem()
+        {
+            var order = new Order(1, new[]
+            {
+                new OrderItem(1,3,10m),
+                new OrderItem(2,5,100m),
+                });
+            Assert.Throws<InvalidOperationException>(() => order.RemoveItem(100));
+
+        }
     }
 }
