@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopBook;
+using ShopBook.Messages;
 using Store.Memory;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace StoreBook.Web
             });
             services.AddSingleton<IBookRepository, BookRepositiry>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<INotificationService, DebugNotificationService>();
             services.AddSingleton<BookService>();
             
         }

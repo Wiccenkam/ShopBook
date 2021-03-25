@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShopBook;
 using ShopBook.Messages;
 using StoreBook.Web.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -13,10 +14,11 @@ namespace StoreBook.Web.Controllers
         private readonly IBookRepository bookRepository;
         private readonly IOrderRepository orderRepository;
         private readonly INotificationService notificationService;
-        public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository)
+        public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository, INotificationService notificationService)
         {
             this.bookRepository = bookRepository;
             this.orderRepository = orderRepository;
+            this.notificationService = notificationService;
         }
         public IActionResult Index()
         {
@@ -37,6 +39,7 @@ namespace StoreBook.Web.Controllers
             return RedirectToAction("Index", "Book", new { id  });
            
         }
+        [HttpPost]
         public IActionResult RemoveItem(int bookid)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
@@ -58,6 +61,7 @@ namespace StoreBook.Web.Controllers
             }
             return (order, cart);
         }
+
         public IActionResult RemoveBook(int bookid)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
@@ -140,6 +144,38 @@ namespace StoreBook.Web.Controllers
 
             cellPhone = cellPhone.Replace(" ", "").Replace("-", "");
             return Regex.IsMatch(cellPhone, @"^\+?\d{12}$");
+        }
+        [HttpPost]
+        public IActionResult StartDelivery(int orderId, string cellPhone, int code)
+        {
+            int? storeCode = HttpContext.Session.GetInt32(cellPhone);
+            if (storeCode == null)
+            {
+                return View("Confirmation",
+                new ConfirmationModel
+                {
+                    OrderId = orderId,
+                    CellPhone = cellPhone,
+                    Errors = new Dictionary<string,string>
+                    {
+                        { "Code", "Code cannot be empty"}
+                    }
+                }) ;
+            }
+            if (storeCode != code)
+            {
+                return View("Confirmation",
+                new ConfirmationModel
+                {
+                    OrderId = orderId,
+                    CellPhone = cellPhone,
+                    Errors = new Dictionary<string, string>
+                    {
+                        { "Code", "Invalid code"}
+                    }
+                });
+            }
+            return View();
         }
     }
 }
