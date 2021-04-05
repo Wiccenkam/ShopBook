@@ -1,16 +1,17 @@
-﻿@model ConfirmationModel
+﻿@using StoreBook.Web.Controllers
+@model StoreBook.Web.Models.ConfirmationModel
 @{
-    ViewData["Title"] = "Confirmation phone ";
+    ViewData["Title"] = "Confirmation Phone Number";
 }
-<h1>Confirmation phone</h1>
 
+<h1>Confirmation Phone</h1>
 
-<form action="@Url.Action("Confirmate")" method="post">
-    <input type="hidden" name="orderId" value="@Model.OrderId" />
-    <input type="hidden" name="cellPhone" value="@Model.CellPhone" />
+<form action="@Url.Action(nameof(OrderController.Confirmate))" method="post">
+    <input type="hidden" name="orderId" value="@Model.OrderId"/>
+    <input type="hidden" name="cellPhone" value="@Model.CellPhone"/>
     <div class="form-group">
         <label for="codeConfirm">Confirm code</label>
-        <input type="text" class="form-control" name="codeConfirm" placeholder="0000" />
+        <input type="text" class="form-control" name="codeConfirm" placeholder="0000"/>
         @if (Model.Errors.ContainsKey("code"))
         {
             <small class="form-text text-danger">@Model.Errors["code"]</small>
