@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShopBook;
+using ShopBook.Contractors;
+using ShopBook.Messages;
 using Store.Memory;
 using System;
 using System.Collections.Generic;
@@ -34,8 +36,11 @@ namespace StoreBook.Web
                 options.Cookie.IsEssential = true;
             });
             services.AddSingleton<IBookRepository, BookRepositiry>();
-            services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<BookService>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<INotificationService, DebugNotificationService>();
+            services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
+           
             
         }
 

@@ -1,5 +1,5 @@
 ﻿@model OrderModel
-@{ 
+@{
     ViewData["Title"] = "Cart";
 }
 <h1>Cart</h1>
@@ -18,19 +18,19 @@
     <tbody>
         @for (int i = 0; i < Model.Items.Length; i++)
         {
-        <tr>
-            <td class="text-right">@(1 + i)</td>
-            <td>@Model.Items[i].Author</td>
-            <td>@Model.Items[i].Title</td>
-            <td class="text-center">@Model.Items[i].Count</td>
-            <td class="text-center">@Model.Items[i].Price $</td>
-            <td class="text-center">
-                <form class="form-inline" action="@Url.Action("RemoveItem","Order")" method="post">
-                    <input type="hidden" name="bookId" value="@Model.Items[i].BookId"/>
-                    <button class="btn btn-danger" type="submit">Удалить</button> 
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td class="text-right">@(1 + i)</td>
+                <td>@Model.Items[i].Author</td>
+                <td>@Model.Items[i].Title</td>
+                <td class="text-center">@Model.Items[i].Count</td>
+                <td class="text-center">@Model.Items[i].Price $</td>
+                <td class="text-center">
+                    <form class="form-inline" action="@Url.Action("RemoveItem","Order")" method="post">
+                        <input type="hidden" name="bookId" value="@Model.Items[i].BookId" />
+                        <button class="btn btn-danger" type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
         }
     </tbody>
     <tfoot>
@@ -41,3 +41,18 @@
         </tr>
     </tfoot>
 </table>
+@if (Model.Items.Length > 0)
+{
+    <form action="@Url.Action("SendConfirmationCode")" method="post">
+        <input type="hidden" name="orderId" value="@Model.Id" />
+        <div class="form-control">
+            <label for="cellPhone">Pnone Number</label>
+            <input type="text" name="cellPhone" value="+380123456789" />
+            @if (Model.Errors.ContainsKey("cellPhone"))
+            {
+                <small class="form-text text-danger">@Model.Errors["cellPhone"]</small>
+            }
+        </div>
+        <button type="submit" class="tbn btn-success">Send Code</button>
+    </form>
+}
