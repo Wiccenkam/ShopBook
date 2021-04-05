@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ShopBook.Contractors
@@ -12,8 +13,8 @@ namespace ShopBook.Contractors
 
         private static IReadOnlyDictionary<string, string> cities = new Dictionary<string, string>
         {
-            {"1", "Minsk" },
-            {"2", "Vitebsk" }
+            {"1", "Moscow" },
+            {"2", "St. Petersberg" }
 
         };
         private static IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> postamates = new Dictionary<string, IReadOnlyDictionary<string, string>>
@@ -37,8 +38,6 @@ namespace ShopBook.Contractors
                 }
             }
         };
-        public string Code => "Postamate";
-        
         public Form CreateForm(Order order)
         {
             if (order == null)
@@ -91,6 +90,27 @@ namespace ShopBook.Contractors
                     throw new InvalidOperationException("Invalid postamate");
                 }
             }
+        }
+
+        public OrderDelivery CreateDelivery(Form form)
+        {
+            if (form.UniqueCode != UniqueCode || !form.IsFinalStep)
+            {
+                throw new InvalidOperationException("Invalid form.");
+            }
+            var cityId = form.Fields.Single(field => field.Name == "city").Values;
+            var cityName = cities[cityId];
+            var postamateId = form.Fields.Single(field => field.Name == "postamate").Values;
+            var postamateName = postamates[cityId][postamateId];
+            var parameters = new Dictionary<string, string>
+           {
+               {nameof(cityId), cityId },
+               {nameof(cityName), cityName },
+               {nameof(postamateId), postamateId },
+               {nameof(postamateName), postamateName }
+           };
+            var description = $"City {cityName}\nPostamate: {postamateName}";
+            return new OrderDelivery(UniqueCode, description,3m, parameters );
         }
     }
 }

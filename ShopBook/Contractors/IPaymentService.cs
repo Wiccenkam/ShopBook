@@ -3,7 +3,7 @@
 
 namespace ShopBook.Contractors
 {
-    public interface IDeliveryService
+    public interface IPaymentService
     {
         string UniqueCode { get; }
         string Title { get; }
@@ -11,6 +11,6 @@ namespace ShopBook.Contractors
         Form CreateForm(Order order);
         Form MoveNext(int orderId, int step, IReadOnlyDictionary<string, string> values);
 
-        OrderDelivery CreateDelivery(Form form);
+        OrderPayment CreateDelivery(Form form);
     }
 }

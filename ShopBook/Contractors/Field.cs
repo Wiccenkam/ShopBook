@@ -8,7 +8,7 @@ namespace ShopBook.Contractors
     {
         public string Label { get; }
         public string Name { get; }
-        public string Values { get; }
+        public string Values { get; set; }
         protected Field(string label, string name, string values)
         {
             Label = label;
