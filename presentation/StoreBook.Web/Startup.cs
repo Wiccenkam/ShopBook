@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using ShopBook;
 using ShopBook.Contractors;
 using ShopBook.Messages;
+using store.Contractors;
 using Store.Memory;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace StoreBook.Web
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<INotificationService, DebugNotificationService>();
             services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
+            services.AddSingleton<IPaymentService, CashPaymentService>();
            
             
         }

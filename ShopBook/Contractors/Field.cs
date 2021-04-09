@@ -8,17 +8,17 @@ namespace ShopBook.Contractors
     {
         public string Label { get; }
         public string Name { get; }
-        public string Values { get; set; }
-        protected Field(string label, string name, string values)
+        public string Value { get; set; }
+        protected Field(string label, string name, string value)
         {
             Label = label;
             Name = name;
-            Values = values;
+            Value = value;
         }
     }
     public class HiddenField : Field
     {
-        public HiddenField(string label, string name, string values) : base(label, name, values)
+        public HiddenField(string label, string name, string value) : base(label, name, value)
         {
 
         }
@@ -26,7 +26,7 @@ namespace ShopBook.Contractors
     public class SelectionField : Field
     {
         public IReadOnlyDictionary<string, string> Items { get; }
-        public SelectionField(string label, string name, string values,IReadOnlyDictionary<string,string> items) : base(label, name, values)
+        public SelectionField(string label, string name, string value,IReadOnlyDictionary<string,string> items) : base(label, name, value)
         {
             Items = items;
         }

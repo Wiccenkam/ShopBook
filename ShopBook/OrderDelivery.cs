@@ -10,7 +10,7 @@ namespace ShopBook
         public string Description { get; }
         public decimal Amount { get; }
         public IReadOnlyDictionary<string,string> Parameters { get; }
-        public OrderDelivery(string uniquecode, string description,decimal amount, IReadOnlyDictionary<string,string> parameters)
+        public OrderDelivery(string uniquecode, string description, IReadOnlyDictionary<string,string> parameters, decimal amount)
         {
             if (string.IsNullOrEmpty(uniquecode))
                 throw new ArgumentException(nameof(uniquecode));
@@ -20,8 +20,8 @@ namespace ShopBook
                 throw new ArgumentNullException(nameof(parameters));
             UniqueCode = uniquecode;
             Description = description;
-            Amount = amount;
             Parameters = parameters;
+            Amount = amount;
         }
     }
 }
