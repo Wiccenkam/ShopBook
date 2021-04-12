@@ -7,6 +7,8 @@ using StoreBook.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Store.Contractors.YandexKassa;
+using Store.Web.Contractors;
 
 namespace StoreBook.Web.Controllers
 {
@@ -17,13 +19,16 @@ namespace StoreBook.Web.Controllers
         private readonly IEnumerable<IDeliveryService> deliveryService;
         private readonly IEnumerable<IPaymentService> paymentService;
         private readonly INotificationService notificationService;
-        public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository, IEnumerable<IDeliveryService> deliveryServices,IEnumerable<IPaymentService> paymentServices, INotificationService notificationService)
+        private readonly IEnumerable<IWebContractorService> webContractorService;
+        public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository, IEnumerable<IDeliveryService> deliveryServices,IEnumerable<IPaymentService> paymentServices, 
+                               INotificationService notificationService, IEnumerable<IWebContractorService> webContractorService)
         {
             this.bookRepository = bookRepository;
             this.orderRepository = orderRepository;
             this.deliveryService = deliveryServices;
             this.paymentService = paymentServices;
             this.notificationService = notificationService;
+            this.webContractorService = webContractorService;
         }
         public IActionResult Index()
         {
@@ -227,7 +232,19 @@ namespace StoreBook.Web.Controllers
             var paymentService = this.paymentService.Single(service => service.UniqueCode == uniqueCode);
             var order = orderRepository.GetById(id);
             var form = paymentService.CreateForm(order);
+
+            var webContractorService = this.webContractorService.SingleOrDefault(service => service.UniqueCode == uniqueCode);
+            if (webContractorService != null)
+            {
+                return Redirect(webContractorService.GetUri);
+            }
+
             return View("PaymentStep", form);
+        }
+        public IActionResult Finish()
+        {
+            HttpContext.Session.RemoveCart(); 
+            return View("PaymentFinish");
         }
         [HttpPost]
         public IActionResult NextPayment(int id, string uniqueCode, int step, Dictionary<string, string> values)

@@ -8,11 +8,11 @@ using ShopBook;
 using ShopBook.Contractors;
 using ShopBook.Messages;
 using store.Contractors;
+using Store.Web.Contractors;
+using Store.Contractors.YandexKassa;
 using Store.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System; 
+
 
 namespace StoreBook.Web
 {
@@ -42,6 +42,8 @@ namespace StoreBook.Web
             services.AddSingleton<INotificationService, DebugNotificationService>();
             services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
             services.AddSingleton<IPaymentService, CashPaymentService>();
+            services.AddSingleton<IPaymentService, YandexKassaPaymentService>();
+            services.AddSingleton<IWebContractorService, YandexKassaPaymentService>();
            
             
         }
@@ -71,6 +73,11 @@ namespace StoreBook.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "yandex.kassa",
+                    areaName:"YandexKassa",
+                    pattern: "YandexKassa/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
