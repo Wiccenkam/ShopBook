@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StoreBook.Web.Models
+namespace Store.Web.Application
 {
     public class OrderItemModel
     {

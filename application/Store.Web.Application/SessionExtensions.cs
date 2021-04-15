@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using StoreBook.Web.Models;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreBook.Web
+namespace Store.Web.Application
 {
     public static class SessionExtensions
     {
@@ -48,11 +48,8 @@ namespace StoreBook.Web
                     var totalCount = reader.ReadInt32();
                     var totalPrice = reader.ReadDecimal();
 
-                    value = new Cart(orderId)
-                    {
-                        TotalCount = totalCount,
-                        TotalPrice = totalPrice,
-                    };
+                    value = new Cart(orderId, totalCount, totalPrice);
+               
                     
                     return true; 
                 }

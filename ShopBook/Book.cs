@@ -20,7 +20,7 @@ namespace ShopBook
             Description = description;
             Price = price;
         }
-        internal static bool IsIsbn(string query)
+        public static bool IsIsbn(string query)
         {
             if(query == null)
             {

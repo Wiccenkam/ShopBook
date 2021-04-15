@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Store.Contractors.YandexKassa;
 using Store.Web.Contractors;
+using Store.Web.Application;
 
 namespace StoreBook.Web.Controllers
 {
@@ -72,7 +73,7 @@ namespace StoreBook.Web.Controllers
             else
             {
                 order = orderRepository.Create();
-                cart = new Cart(order.Id);
+                cart = new Cart(order.Id,0,0m);
             }
             return (order, cart);
         }
@@ -98,8 +99,8 @@ namespace StoreBook.Web.Controllers
         {
             orderRepository.Update(order);
 
-            cart.TotalCount = order.TotalCount;
-            cart.TotalPrice = order.TotalPrice;
+            cart = new Cart(order.Id, order.TotalCount, order.TotalPrice);
+
             HttpContext.Session.Set(cart);
         }
         

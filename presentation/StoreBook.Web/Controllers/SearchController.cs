@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StoreBook.Web.Controllers
+namespace Store.Web.Application
 {
     public class SearchController : Controller
     {
