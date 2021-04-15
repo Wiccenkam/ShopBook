@@ -20,13 +20,13 @@ namespace StoreBook.Web.Controllers
         private readonly IEnumerable<IPaymentService> paymentService;
         private readonly INotificationService notificationService;
         private readonly IEnumerable<IWebContractorService> webContractorService;
-        public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository, IEnumerable<IDeliveryService> deliveryServices,IEnumerable<IPaymentService> paymentServices, 
+        public OrderController(IBookRepository bookRepository, IOrderRepository orderRepository, IEnumerable<IDeliveryService> deliveryService,IEnumerable<IPaymentService> paymentService, 
                                INotificationService notificationService, IEnumerable<IWebContractorService> webContractorService)
         {
             this.bookRepository = bookRepository;
             this.orderRepository = orderRepository;
-            this.deliveryService = deliveryServices;
-            this.paymentService = paymentServices;
+            this.deliveryService = deliveryService;
+            this.paymentService = paymentService;
             this.notificationService = notificationService;
             this.webContractorService = webContractorService;
         }
@@ -43,8 +43,13 @@ namespace StoreBook.Web.Controllers
         public IActionResult AddItem(int id, int count=1)//Ошибка представления из за анонимного метода 
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
+
             var book = bookRepository.GetById(id);
-            order.AddOrUpdateItem(book,count);
+            if (order.Items.TryGet(id, out OrderItem orderItem))
+                orderItem.Count += count;
+            else
+                order.Items.Add(book.Id, book.Price, count);
+
             SaveOrderAndCart(order, cart);
             return RedirectToAction("Index", "Book", new { id  });
            
@@ -53,7 +58,7 @@ namespace StoreBook.Web.Controllers
         public IActionResult RemoveItem(int bookid)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
-            order.RemoveItem(bookid);
+            order.Items.Remove(bookid);
             SaveOrderAndCart(order, cart);
             return RedirectToAction("Index", "Order");
         }
@@ -75,7 +80,7 @@ namespace StoreBook.Web.Controllers
         public IActionResult RemoveBook(int bookid)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
-            order.GetItem(bookid).Count--;
+            order.Items.Get(bookid).Count--;
             SaveOrderAndCart(order, cart);
             return RedirectToAction("Index", "Book", new { bookid });
         }
@@ -83,7 +88,7 @@ namespace StoreBook.Web.Controllers
         public IActionResult UpdateItem(int bookid, int count)
         {
             (Order order, Cart cart) = GetOrCreateOrderAndCart();
-            order.GetItem(bookid).Count= count;
+            order.Items.Get(bookid).Count= count;
             SaveOrderAndCart(order, cart);
             return RedirectToAction("Index", "Book", new { bookid });
 
