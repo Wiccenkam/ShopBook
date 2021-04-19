@@ -6,30 +6,30 @@ namespace ShopBook.Contractors
 {
     public class CashPaymentService : IPaymentService
     {
-        public string UniqueCode => "Cash";
+        public string Name => "Cash";
 
         public string Title => "Payment by Cash";
 
-        public OrderPayment GetPayment(Form formDelivery)
+        public OrderPayment GetPayment(Form form)
         {
-                if (formDelivery.UniqueCode != UniqueCode || !formDelivery.IsFinalStep)
+                if (form.ServiceName != Name || !form.IsFinalStep)
                 {
                     throw new InvalidOperationException("Invalid payment form");
 
                 }
-                return new OrderPayment(UniqueCode, "Cash payment", new Dictionary<string, string>());
+                return new OrderPayment(Name, "Cash payment", form.Parameters);
         }
 
-        public Form CreateForm(Order order)
+        public Form FirstForm(Order order)
         {
-            return new Form(UniqueCode, order.Id,1,false,new Field[0]);
+            return Form.CreateFirst(Name).AddParameter("orderId", order.Id.ToString());
         }
 
-        public Form MoveNextForm(int orderId, int step, IReadOnlyDictionary<string, string> values)
+        public Form MoveNextForm( int step, IReadOnlyDictionary<string, string> values)
         {
             if (step != 1)
                 throw new InvalidOperationException("Invalid cash step");
-            return new Form(UniqueCode, orderId, 2, true, new Field[0]);
+            return Form.CreateLast(Name, step+1,values);
         }
     }
 }

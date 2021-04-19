@@ -41,13 +41,17 @@
         </tr>
     </tfoot>
 </table>
+<p>
+    To place an order, you must confirm your mobile phone number. 
+    Enter the number and press <em>send code</em>. An SMS will be sent to your number
+</p>
 @if (Model.Items.Length > 0)
 {
-    <form action="@Url.Action("SendConfirmationCode")" method="post">
-        <input type="hidden" name="orderId" value="@Model.Id" />
+    <form action="@Url.Action(nameof(OrderController.SendConfirmationCode))" method="post">
+        
         <div class="form-control">
             <label for="cellPhone">Pnone Number</label>
-            <input type="text" name="cellPhone" value="+380123456789" />
+            <input type="text" name="cellPhone" placeholder="+380123456789" value="+380123456789" />
             @if (Model.Errors.ContainsKey("cellPhone"))
             {
                 <small class="form-text text-danger">@Model.Errors["cellPhone"]</small>
