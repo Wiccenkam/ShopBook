@@ -6,9 +6,9 @@
 }
 <h1>Yandex.Kassa</h1>
 <p>
-    <a href="/YandexKassa/Home/CallBack">Payment</a>
+    
 </p>
-<form action="@Url.Action(nameof(HomeController.CallBack)),Payment">
+<form action="@Url.Action(nameof(HomeController.CallBack))">
     <input type="hidden" name="orderId" value="@Model.OrderId" />
     <input type="hidden" name="returnUri" value="@Model.ReturnUri" />
     <button type="submit" class="btn btn-success">Pay</button>
