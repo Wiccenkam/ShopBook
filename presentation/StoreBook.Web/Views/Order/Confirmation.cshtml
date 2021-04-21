@@ -1,30 +1,39 @@
-﻿@using StoreBook.Web.Controllers
-@model StoreBook.Web.Models.ConfirmationModel
+﻿
+@model OrderModel
 @{
     ViewData["Title"] = "Confirmation Phone Number";
 }
 
 <h1>Confirmation Phone</h1>
-
-<form action="@Url.Action(nameof(OrderController.Confirmate))" method="post">
-    <input type="hidden" name="orderId" value="@Model.OrderId"/>
+<p>
+    Enter <em>confirmation code</em> from SMS
+</p>
+<form action="@Url.Action(nameof(OrderController.ConfirmCellPhone))" method="post">
+    
     <input type="hidden" name="cellPhone" value="@Model.CellPhone"/>
     <div class="form-group">
         <label for="codeConfirm">Confirm code</label>
-        <input type="text" class="form-control" name="codeConfirm" placeholder="0000"/>
-        @if (Model.Errors.ContainsKey("code"))
+        <input type="text" class="form-control" name="confirmationCode" placeholder="0000"/>
+        @if (Model.Errors.ContainsKey("confirmationCode"))
         {
-            <small class="form-text text-danger">@Model.Errors["code"]</small>
+            <small class="form-text text-danger">@Model.Errors["confirmationCode"]</small>
         }
     </div>
     <button type="submit" class="btn btn-danger">Verify</button>
 </form>
 
+<p>
+    Please enter phone number again
+</p>
 <form action="@Url.Action("SendConfirmationCode")" method="post">
-    <input type="hidden" name="orderId" value="@Model.OrderId" />
+    
     <div class="form-group">
         <label for="cellPhone">Mobile Phone Number</label>
         <input class="form-control" type="text" name="cellPhone" value="@Model.CellPhone" />
+       @if (Model.Errors.ContainsKey("cellPhone"))
+       {
+           <small class="form-text-danger">@Model.Errors["cellPhone"]</small>
+       }
     </div>
     <button type="submit" class="btn btn-success">Repeat code</button>
 </form>

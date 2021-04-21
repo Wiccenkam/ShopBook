@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopBook;
 using Store.Memory;
+using Store.Web.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,16 @@ namespace StoreBook.Web.Controllers
 {
     public class BookController : Controller
     {
-        private readonly IBookRepository bookRepository;
-        public BookController(IBookRepository bookRepository)
+        private readonly BookService bookSerivce;
+        public BookController(BookService bookSerivce)
         {
-            this.bookRepository = bookRepository;
+            this.bookSerivce = bookSerivce;
         }
         public IActionResult Index(int id)
         {
-            Book book =  bookRepository.GetById(id);
+            var model = bookSerivce.GetById(id);
 
-            return View(book);
+            return View(model);
         }
     }
 }

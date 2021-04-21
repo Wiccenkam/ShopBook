@@ -14,9 +14,5 @@
     <ProjectReference Include="..\..\ShopBook\ShopBook.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\YandexKassa\Models\" />
-  </ItemGroup>
-
 
 </Project>
