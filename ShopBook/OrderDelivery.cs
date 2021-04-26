@@ -8,7 +8,7 @@ namespace ShopBook
     {
         public string UniqueCode { get; }
         public string Description { get; }
-        public decimal Amount { get; }
+        public decimal Price { get; }
         public IReadOnlyDictionary<string,string> Parameters { get; }
         public OrderDelivery(string uniquecode, string description, IReadOnlyDictionary<string,string> parameters, decimal amount)
         {
@@ -21,7 +21,7 @@ namespace ShopBook
             UniqueCode = uniquecode;
             Description = description;
             Parameters = parameters;
-            Amount = amount;
+            Price = amount;
         }
     }
 }

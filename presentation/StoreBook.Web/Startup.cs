@@ -10,7 +10,7 @@ using ShopBook.Messages;
 using store.Contractors;
 using Store.Web.Contractors;
 using Store.Contractors.YandexKassa;
-using Store.Memory;
+
 using System;
 using Store.Web.Application;
 
@@ -37,10 +37,10 @@ namespace StoreBook.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            services.AddSingleton<IBookRepository, BookRepositiry>();
+            
             services.AddSingleton<BookService>();
             services.AddSingleton<OrderService>();
-            services.AddSingleton<IOrderRepository, OrderRepository>();
+            
             services.AddSingleton<INotificationService, DebugNotificationService>();
             services.AddSingleton<IDeliveryService, PostamateDeliveryService>();
             services.AddSingleton<IPaymentService, CashPaymentService>();

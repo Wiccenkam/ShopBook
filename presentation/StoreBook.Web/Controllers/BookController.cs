@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopBook;
-using Store.Memory;
+
 using Store.Web.Application;
 using System;
 using System.Collections.Generic;
