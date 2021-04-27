@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShopBook;
+using Store.Data.EF;
 using ShopBook.Contractors;
 using ShopBook.Messages;
 using store.Contractors;
@@ -37,7 +37,9 @@ namespace StoreBook.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            
+
+            services.AddEfRepositories(Configuration.GetConnectionString("Store"));
+
             services.AddSingleton<BookService>();
             services.AddSingleton<OrderService>();
             

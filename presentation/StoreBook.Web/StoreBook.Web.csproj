@@ -6,12 +6,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\application\Store.Web.Application\Store.Web.Application.csproj" />
+    <ProjectReference Include="..\..\infostructure\Store.Data.EF\Store.Data.EF.csproj" />
     <ProjectReference Include="..\..\plugins\Store.Contractors.YandexKassa\Store.Contractors.YandexKassa.csproj" />
     <ProjectReference Include="..\..\ShopBook\ShopBook.csproj" />
     <ProjectReference Include="..\Store.Web.Contractors\Store.Web.Contractors.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 

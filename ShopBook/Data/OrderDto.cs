@@ -14,7 +14,7 @@ namespace ShopBook.Data
         public Dictionary<string,string> DeliveryParameters { get; set; }
 
         public string PaymentServiceName { get; set; }
-        public String PaymentDescription { get; set; }
+        public string PaymentDescription { get; set; }
         public Dictionary<string, string> PaymentParameters { get; set; }
 
         public List<OrderItemDto> ItemsDtos { get; set; } = new List<OrderItemDto>();
